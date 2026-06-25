@@ -1,0 +1,359 @@
+import React, { useState } from 'react';
+import { ShieldCheck, Heart, Award, ChevronRight, CheckCircle2, Phone, Mail, MapPin } from 'lucide-react';
+
+const products = [
+  // Mẹ & Bé
+  {
+    id: 1,
+    category: 'mom_baby',
+    name: 'Wintop Mama',
+    subtitle: 'Hỗ trợ thai kỳ khỏe mạnh',
+    benefits: ['Bổ sung Sắt, Axit Folic, Vitamin B12', 'Lactium giúp mẹ ngủ ngon', 'DHA phát triển não bộ thai nhi'],
+    imageColor: 'bg-pink-100',
+    textColor: 'text-pink-600'
+  },
+  {
+    id: 2,
+    category: 'mom_baby',
+    name: 'Wintop Baby',
+    subtitle: 'Khởi đầu vững chắc (0-12 tháng)',
+    benefits: ['Sữa non tăng cường miễn dịch', 'Chiết xuất Tổ yến cao cấp', 'Hệ chất xơ 2\'-FL HMO tiêu hóa tốt'],
+    imageColor: 'bg-blue-100',
+    textColor: 'text-blue-600'
+  },
+  // Trẻ em
+  {
+    id: 3,
+    category: 'kids',
+    name: 'Wintop KAO IQ',
+    subtitle: 'Phát triển thể chất & trí tuệ (1-10 tuổi)',
+    benefits: ['Canxi Nano, MK-7 tăng chiều cao', 'DHA, Omega 3-6 hoàn thiện não bộ', 'Kẽm, Selen tăng đề kháng'],
+    imageColor: 'bg-green-100',
+    textColor: 'text-green-600'
+  },
+  {
+    id: 4,
+    category: 'kids',
+    name: 'Wintop BA',
+    subtitle: 'Tăng cân & phục hồi thể trạng',
+    benefits: ['Năng lượng cao 1.2 kcal/ml', '5 Enzyme giúp ăn ngon miệng', 'Whey Protein dễ hấp thu'],
+    imageColor: 'bg-orange-100',
+    textColor: 'text-orange-600'
+  },
+  {
+    id: 5,
+    category: 'kids',
+    name: 'Wintop Colostrum Gain',
+    subtitle: 'Sữa pha sẵn tiện lợi',
+    benefits: ['Nguyên liệu sữa non từ Mỹ', 'Tăng cân, cao lớn khỏe mạnh', 'Ngon hơn khi uống lạnh'],
+    imageColor: 'bg-blue-50',
+    textColor: 'text-blue-800'
+  },
+  // Người lớn
+  {
+    id: 6,
+    category: 'adults',
+    name: 'Wintop Diabet',
+    subtitle: 'Hỗ trợ ổn định đường huyết',
+    benefits: ['Hệ bột đường thấp Isomalt', 'Tốt cho tim mạch (MUFA, PUFA)', 'Bổ sung chiết xuất hạt óc chó'],
+    imageColor: 'bg-purple-100',
+    textColor: 'text-purple-600'
+  },
+  {
+    id: 7,
+    category: 'adults',
+    name: 'Wintop Canxi Nano',
+    subtitle: 'Cho hệ xương khớp chắc khỏe',
+    benefits: ['Canxi Nano dễ hấp thu', 'Glucosamine hỗ trợ sụn khớp', 'Phòng ngừa loãng xương'],
+    imageColor: 'bg-teal-100',
+    textColor: 'text-teal-600'
+  },
+  {
+    id: 8,
+    category: 'adults',
+    name: 'Wintop Gain Pro',
+    subtitle: 'Dành cho người gầy yếu',
+    benefits: ['Năng lượng cao phục hồi sức khỏe', 'Chiết xuất tổ yến & hạt óc chó', 'Dễ tiêu hóa, hấp thu tốt'],
+    imageColor: 'bg-yellow-100',
+    textColor: 'text-yellow-600'
+  },
+  {
+    id: 9,
+    category: 'adults',
+    name: 'Wintop Sure Gold',
+    subtitle: 'Phục hồi sức khỏe toàn diện',
+    benefits: ['Lactium giảm căng thẳng, ngủ ngon', 'Sữa non giàu kháng thể IgG', 'Bổ sung 20+ Vitamin & Khoáng chất'],
+    imageColor: 'bg-amber-100',
+    textColor: 'text-amber-700'
+  }
+];
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState('all');
+
+  const filteredProducts = activeTab === 'all' 
+    ? products 
+    : products.filter(p => p.category === activeTab);
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
+      
+      {/* Navigation */}
+      <nav className="bg-white shadow-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-20 items-center">
+            <div className="flex items-center gap-2">
+              {/* Logo WINTOP placeholder */}
+              <div className="bg-blue-800 text-white font-black text-2xl px-4 py-1 rounded-full border-b-4 border-yellow-500 shadow-md tracking-wider">
+                WINTOP
+              </div>
+            </div>
+            <div className="hidden md:flex space-x-8 font-semibold text-blue-900">
+              <a href="#" className="hover:text-yellow-500 transition">Trang chủ</a>
+              <a href="#about" className="hover:text-yellow-500 transition">Giới thiệu</a>
+              <a href="#products" className="hover:text-yellow-500 transition">Sản phẩm</a>
+              <a href="#contact" className="hover:text-yellow-500 transition">Liên hệ</a>
+            </div>
+            <a href="#contact" className="bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-bold px-6 py-2.5 rounded-full shadow-lg transition transform hover:-translate-y-0.5">
+              Nhận tư vấn ngay
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative bg-blue-900 text-white overflow-hidden">
+        {/* Abstract background graphics */}
+        <div className="absolute inset-0 opacity-20">
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-yellow-400 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 -left-24 w-72 h-72 bg-blue-400 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 lg:py-32 flex flex-col lg:flex-row items-center">
+          <div className="lg:w-1/2 lg:pr-12 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800 border border-blue-700 text-yellow-400 text-sm font-semibold mb-6">
+              <Award size={16} />
+              <span>Top 5 Thương Hiệu Hàng Đầu Châu Á</span>
+            </div>
+            <h1 className="text-4xl lg:text-6xl font-extrabold leading-tight mb-6">
+              Giải Pháp <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">Dinh Dưỡng Vàng</span> Cho Cả Gia Đình
+            </h1>
+            <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto lg:mx-0">
+              Wintop tự hào mang đến các dòng sản phẩm sữa chuyên biệt, với nguồn nguyên liệu sữa non nhập khẩu trực tiếp từ Hoa Kỳ, sản xuất trên dây chuyền đạt chuẩn ISO quốc tế.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="#products" className="bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-bold px-8 py-3.5 rounded-full shadow-lg transition text-center text-lg">
+                Khám phá sản phẩm
+              </a>
+              <a href="#about" className="bg-blue-800 hover:bg-blue-700 border border-blue-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg transition text-center text-lg">
+                Tìm hiểu thêm
+              </a>
+            </div>
+          </div>
+          <div className="lg:w-1/2 mt-16 lg:mt-0 relative">
+            <div className="w-full h-80 lg:h-[500px] bg-gradient-to-tr from-blue-200 to-white rounded-3xl shadow-2xl flex items-center justify-center p-6 border-4 border-white/20 relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/5 z-10"></div>
+                <span className="text-blue-800 font-bold text-xl z-20 bg-white/80 px-6 py-3 rounded-xl shadow-sm backdrop-blur-sm">
+                                    </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Features */}
+      <section id="about" className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center p-6 rounded-2xl bg-blue-50 hover:bg-blue-100 transition duration-300">
+              <div className="w-16 h-16 mx-auto bg-blue-900 text-yellow-400 rounded-2xl flex items-center justify-center mb-4 transform rotate-3">
+                <ShieldCheck size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Chất lượng Quốc Tế</h3>
+              <p className="text-gray-600">Sản xuất tại nhà máy đạt chuẩn ISO 9001:2015 & ISO 22000:2018. Quy trình kiểm soát nghiêm ngặt.</p>
+            </div>
+            <div className="text-center p-6 rounded-2xl bg-yellow-50 hover:bg-yellow-100 transition duration-300">
+              <div className="w-16 h-16 mx-auto bg-yellow-500 text-blue-900 rounded-2xl flex items-center justify-center mb-4 -rotate-3">
+                <Heart size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Nguyên Liệu Cao Cấp</h3>
+              <p className="text-gray-600">Nguồn sữa non, đạm đậu nành nhập khẩu từ Hoa Kỳ, kết hợp tổ yến & hạt óc chó giàu dinh dưỡng.</p>
+            </div>
+            <div className="text-center p-6 rounded-2xl bg-blue-50 hover:bg-blue-100 transition duration-300">
+              <div className="w-16 h-16 mx-auto bg-blue-900 text-yellow-400 rounded-2xl flex items-center justify-center mb-4 rotate-3">
+                <Award size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Chuyên Biệt Từng Độ Tuổi</h3>
+              <p className="text-gray-600">Công thức nghiên cứu riêng biệt, đáp ứng chính xác nhu cầu dinh dưỡng từ trẻ sơ sinh đến người cao tuổi.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Section */}
+      <section id="products" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-extrabold text-blue-900 mb-4">Hệ Sinh Thái Sản Phẩm Wintop</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Mỗi sản phẩm là một công thức dinh dưỡng tối ưu, được thiết kế riêng để chăm sóc sức khỏe cho từng thành viên trong gia đình bạn.</p>
+          </div>
+
+          {/* Tabs */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {[
+              { id: 'all', label: 'Tất cả sản phẩm' },
+              { id: 'mom_baby', label: 'Mẹ bầu & Sơ sinh' },
+              { id: 'kids', label: 'Trẻ em đang lớn' },
+              { id: 'adults', label: 'Người lớn & Người bệnh' }
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-6 py-2.5 rounded-full font-semibold transition-all ${
+                  activeTab === tab.id 
+                    ? 'bg-blue-900 text-yellow-400 shadow-md' 
+                    : 'bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-900 border border-gray-200'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Product Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProducts.map((product) => (
+              <div key={product.id} className="bg-white rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 flex flex-col">
+                {/* Product Image Placeholder */}
+                <div className={`h-64 ${product.imageColor} flex items-center justify-center p-6 relative`}>
+                    {/* Decorative element */}
+                    <div className="absolute top-4 right-4 bg-white/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-700">
+                        WINTOP
+                    </div>
+                    <div className="text-center">
+                        <div className={`w-32 h-40 mx-auto rounded-xl shadow-md flex items-center justify-center bg-gradient-to-b from-white to-gray-50 border border-gray-200`}>
+                           <span className={`font-black text-center px-2 ${product.textColor}`}>
+                               [Image of<br/>{product.name}]
+                           </span>
+                        </div>
+                    </div>
+                </div>
+                
+                {/* Product Info */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-2xl font-bold text-blue-900 mb-1">{product.name}</h3>
+                  <p className="text-yellow-600 font-medium text-sm mb-4 bg-yellow-50 inline-block px-3 py-1 rounded-md self-start">{product.subtitle}</p>
+                  
+                  <ul className="space-y-2 mb-6 flex-grow">
+                    {product.benefits.map((benefit, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <CheckCircle2 className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-600 text-sm leading-tight">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <button className="w-full flex items-center justify-center gap-2 bg-blue-50 text-blue-900 hover:bg-blue-900 hover:text-yellow-400 font-semibold py-3 rounded-xl transition duration-300 group">
+                    Tìm hiểu chi tiết
+                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Lead Generation / Contact Section */}
+      <section id="contact" className="py-20 bg-gradient-to-br from-blue-900 to-blue-800 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-3xl"></div>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+            <div className="md:w-5/12 bg-yellow-500 p-8 text-blue-900 flex flex-col justify-center">
+              <h3 className="text-3xl font-extrabold mb-4">Nhận Tư Vấn Miễn Phí</h3>
+              <p className="font-medium mb-8">Để lại thông tin, chuyên gia dinh dưỡng của Wintop sẽ liên hệ tư vấn sản phẩm phù hợp nhất cho gia đình bạn.</p>
+              
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 font-semibold">
+                  <Phone className="w-5 h-5 text-blue-800" />
+                  <span>1900 6093</span>
+                </div>
+                <div className="flex items-center gap-3 font-semibold">
+                  <Mail className="w-5 h-5 text-blue-800" />
+                  <span>marketing@isopharma.vn</span>
+                </div>
+                <div className="flex items-start gap-3 font-semibold">
+                  <MapPin className="w-5 h-5 text-blue-800 mt-1 flex-shrink-0" />
+                  <span>60 Kim Ngưu, Hai Bà Trưng, Hà Nội</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="md:w-7/12 p-8">
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Họ và tên</label>
+                  <input type="text" placeholder="Nhập họ tên của bạn" className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition outline-none" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
+                  <input type="tel" placeholder="Nhập số điện thoại" className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition outline-none" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Bạn quan tâm sản phẩm cho ai?</label>
+                  <select className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition outline-none bg-white">
+                    <option>Chọn đối tượng...</option>
+                    <option>Mẹ bầu & sau sinh</option>
+                    <option>Trẻ em (0-10 tuổi)</option>
+                    <option>Người trưởng thành / Người gầy</option>
+                    <option>Người bệnh tiểu đường / Xương khớp</option>
+                  </select>
+                </div>
+                <button className="w-full bg-blue-900 hover:bg-blue-800 text-yellow-400 font-bold text-lg py-4 rounded-xl shadow-lg transition mt-4">
+                  Đăng ký tư vấn ngay
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-300 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="col-span-1 md:col-span-2">
+            <div className="text-white font-black text-2xl mb-4 tracking-wider">
+              WINTOP
+            </div>
+            <p className="text-gray-400 mb-4 max-w-sm">
+              Thương hiệu dinh dưỡng cao cấp, cung cấp những giải pháp toàn diện cho sức khỏe và sự phát triển của mọi thành viên trong gia đình.
+            </p>
+            <p className="text-sm text-gray-500">Phân phối bởi: Công ty TNHH Dược Phẩm ISOPHARMA</p>
+          </div>
+          <div>
+            <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Khám Phá</h4>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-yellow-400 transition">Trang chủ</a></li>
+              <li><a href="#" className="hover:text-yellow-400 transition">Về Wintop</a></li>
+              <li><a href="#" className="hover:text-yellow-400 transition">Tất cả sản phẩm</a></li>
+              <li><a href="#" className="hover:text-yellow-400 transition">Hệ thống phân phối</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Hỗ Trợ</h4>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-yellow-400 transition">Chính sách đổi trả</a></li>
+              <li><a href="#" className="hover:text-yellow-400 transition">Chính sách bảo mật</a></li>
+              <li><a href="#" className="hover:text-yellow-400 transition">Điều khoản dịch vụ</a></li>
+              <li><a href="#" className="hover:text-yellow-400 transition">Liên hệ</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+          © {new Date().getFullYear()} Bản quyền thuộc về Wintop. Đã đăng ký bản quyền.
+        </div>
+      </footer>
+    </div>
+  );
+}
